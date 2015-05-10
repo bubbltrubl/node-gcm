@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>Sender</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+  <link rel="stylesheet" media="all" href="docco.css" />
+</head>
+<body>
+  <div id="container">
+    <div id="background"></div>
+    
+      <ul id="jump_to">
+        <li>
+          <a class="large" href="javascript:void(0);">Jump To &hellip;</a>
+          <a class="small" href="javascript:void(0);">+</a>
+          <div id="jump_wrapper">
+          <div id="jump_page_wrapper">
+            <div id="jump_page">
+              
+                
+                <a class="source" href="message.js.html">
+                  message.js.md
+                </a>
+              
+                
+                <a class="source" href="sender.js.html">
+                  sender.js.md
+                </a>
+              
+            </div>
+          </div>
+        </li>
+      </ul>
+    
+    <ul class="sections">
+        
+        
+        
+        <li id="section-1">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-1">&#182;</a>
+              </div>
+              <h1 id="sender">Sender</h1>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> gcm = <span class="hljs-built_in">require</span>(<span class="hljs-string">"gcm"</span>);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-2">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-2">&#182;</a>
+              </div>
+              <p>To send <a href="message.js.html">a message</a>, you need a connection to the GCM service.
+This is established using your API key.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> sender = <span class="hljs-keyword">new</span> gcm.Sender(<span class="hljs-string">"your-api-key"</span>);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-3">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-3">&#182;</a>
+              </div>
+              <p>You can manually define the max number of sockets to have open at one time.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> sender = <span class="hljs-keyword">new</span> gcm.Sender(<span class="hljs-string">"your-api-key"</span>, {
+  maxSockets: <span class="hljs-number">12</span>
+});</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-4">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-4">&#182;</a>
+              </div>
+              <p>If you want to use a proxy, you can do that, too.
+This is <a href="https://github.com/request/request#proxies">just like passing a proxy on to request</a>.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> sender = <span class="hljs-keyword">new</span> gcm.Sender(<span class="hljs-string">"your-api-key"</span>, {
+  proxy: <span class="hljs-string">"http://your-proxy.com"</span>
+});</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-5">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-5">&#182;</a>
+              </div>
+              <h2 id="sending-off-a-message">Sending off a message</h2>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>...</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-6">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-6">&#182;</a>
+              </div>
+              <p>Now that you have your sender set up, it’s time to send off <a href="message.js.html">a message</a>.
+First, you need to get the Registration IDs of your recipients.
+You <a href="https://developer.android.com/google/gcm/gs.html">create Registration IDs in the app</a>, and this won’t be covered here.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-comment">/* Magically found Registration IDs */</span>
+<span class="hljs-keyword">var</span> registrationIds = [
+  <span class="hljs-string">"1"</span>,
+  <span class="hljs-string">"2"</span>,
+  <span class="hljs-string">"3"</span>
+];</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-7">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-7">&#182;</a>
+              </div>
+              <p>The sending of a message can be done in a variety of ways, but the simplest takes only what you have now.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>sender.send(msg, registrationIds, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(error, result)</span> </span>{
+  <span class="hljs-keyword">if</span>(error) {
+    <span class="hljs-comment">/* Something went wrong */</span>
+  }
+  <span class="hljs-keyword">else</span> {
+    <span class="hljs-comment">/* The request was sent off */</span>
+  }
+});</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-8">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-8">&#182;</a>
+              </div>
+              <h4 id="errors-and-results">Errors and Results</h4>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>...</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-9">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-9">&#182;</a>
+              </div>
+              <p>If the sender returns an <code>error</code>, something went wrong in the communication with the server.
+This means that the message was sent to <em>none</em> of the recipients.
+If an invalid response code was received from the server (for example, <code>401</code>), this will be the value of <code>error</code>.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">if</span>(error == <span class="hljs-number">401</span>) {
+  <span class="hljs-comment">/* Request was unauthorized (most likely wrong API key) */</span>
+}
+<span class="hljs-keyword">if</span>(error == <span class="hljs-number">400</span>) {
+  <span class="hljs-comment">/* Something was wrong with the request (most likely the message was invalid) */</span>
+}
+<span class="hljs-keyword">if</span>(error == <span class="hljs-number">500</span>) {
+  <span class="hljs-comment">/* Something went wrong on the server */</span>
+}
+<span class="hljs-comment">/* ... */</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-10">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-10">&#182;</a>
+              </div>
+              <p>The <code>result</code> is returned if no <code>error</code> was.
+In this case, the message was sent to between 0 and all of the recipients.
+<strong>Note that the presence of a <code>result</code> does not mean that any messages were sent.</strong></p>
+<p>A <code>result</code> <a href="https://developer.android.com/google/gcm/http.html#response">contains four fields</a>:</p>
+<ul>
+<li><code>success</code>, the number of recipients who were sent the message.</li>
+<li><code>failure</code>, the number of recipients who the message could not be sent to.</li>
+<li><code>canonical_ids</code>, the number of recipients who have changed their Registration ID.
+The message was still sent to them, but your local version of their Registration ID should be updated.</li>
+<li><code>results</code>, an array of results for each individual recipient.
+The array is ordered in the same way the <code>registrationIds</code> were.</li>
+</ul>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">if</span>(result.success == registrationIds.length) {
+  <span class="hljs-comment">/* All the messages succeeded */</span>
+}
+
+<span class="hljs-keyword">if</span>(result.failure &gt; <span class="hljs-number">0</span>) {
+  <span class="hljs-comment">/* One or more messages failed */</span>
+}
+
+<span class="hljs-keyword">if</span>(result.failure == registrationIds.length) {
+  <span class="hljs-comment">/* All the messages failed */</span>
+}
+
+<span class="hljs-keyword">if</span>(result.canonical_ids &gt; <span class="hljs-number">0</span>) {
+  <span class="hljs-comment">/* One or more of the recipients have new Registration IDs */</span>
+}</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-11">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-11">&#182;</a>
+              </div>
+              <p>Each of the <code>results</code> may contain one of the following values:</p>
+<ul>
+<li><code>message_id</code>, if the message was sent succesfully.</li>
+<li><code>registration_id</code>, if the recipient’s Registration ID has changed.
+The field will contain the new Registration ID, which should replace the old one in your local storage.
+All future messages for this recipient should use the new ID.</li>
+<li><code>error</code>, if something went wrong, sending to that specific recipient.
+If it is <code>&quot;Unavailable&quot;</code>, this means the GCM servers were busy and could not process the message for this particular recipient, and the message should be retried.
+The GCM API documentation has a <a href="https://developer.android.com/google/gcm/http.html#error_codes">list of possible error codes</a>.</li>
+</ul>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>result.results.forEach(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(r, index)</span> </span>{
+  <span class="hljs-keyword">var</span> registrationId = registrationIds[index];
+
+  <span class="hljs-keyword">if</span>(r.canonical_id) {
+    <span class="hljs-comment">/* A new ID was found! Update our local version... */</span>
+    myLocalStorage.update(registrationId, r.canonical_id);
+  }
+
+  <span class="hljs-keyword">if</span>(r.error) {
+    <span class="hljs-built_in">console</span>.error(<span class="hljs-string">"Failed to send message to "</span>+registrationId, r.error);
+  }
+
+  <span class="hljs-keyword">if</span>(r.message_id) {
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"Succesfully sent message "</span>+r.message_id+<span class="hljs-string">" to "</span>+registrationId);
+  }
+
+});</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-12">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-12">&#182;</a>
+              </div>
+              <h4 id="retries-and-backoff">Retries and Backoff</h4>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>...</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-13">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-13">&#182;</a>
+              </div>
+              <p>The <code>send</code> method is intelligent:
+per default, it retries a request 5 times with exponential backoff (starting at 1000 ms).
+These values can be customized through an optional <code>options</code> object.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> options = {
+  retries: <span class="hljs-number">7</span>,
+  backoff: <span class="hljs-number">100</span>
+};
+
+sender.send(msg, registrationIds, options, callback);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-14">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-14">&#182;</a>
+              </div>
+              <p>If you only want to set a number of retries, you can just pass that instead of the <code>options</code> argument.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>sender.send(msg, registrationIds, <span class="hljs-number">7</span>, callback);</pre></div></div>
+            
+        </li>
+        
+    </ul>
+  </div>
+</body>
+</html>

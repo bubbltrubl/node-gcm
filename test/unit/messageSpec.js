@@ -12,6 +12,7 @@ describe('UNIT Message', function () {
       expect(mess.delayWhileIdle).to.be.undefined;
       expect(mess.timeToLive).to.be.undefined;
       expect(mess.dryRun).to.be.undefined;
+      expect(mess.contentAvailable).to.be.undefined;
       expect(mess.data).to.deep.equal({});
     });
 
@@ -27,6 +28,7 @@ describe('UNIT Message', function () {
         delayWhileIdle: true,
         timeToLive: 100,
         dryRun: true,
+        contentAvailable: true,
         data: {
           score: 98
         }
@@ -47,6 +49,7 @@ describe('UNIT Message', function () {
       expect(JSON.stringify(mess)).to.equal(JSON.stringify(obj));
       expect(mess.timeToLive).to.be.undefined;
       expect(mess.dryRun).to.be.undefined;
+      expect(mess.contentAvailable).to.be.undefined;
     });
   });
 

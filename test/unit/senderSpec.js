@@ -82,6 +82,7 @@ describe('UNIT Sender', function () {
         collapseKey: 'Message',
         timeToLive: 100,
         dryRun: true,
+        contentAvailable: true,
         data: {
           name: 'Matt'
         }
@@ -93,6 +94,7 @@ describe('UNIT Sender', function () {
       expect(body[Constants.PARAM_COLLAPSE_KEY]).to.equal(mess.collapseKey);
       expect(body[Constants.PARAM_TIME_TO_LIVE]).to.equal(mess.timeToLive);
       expect(body[Constants.PARAM_DRY_RUN]).to.equal(mess.dryRun);
+      expect(body[Constants.PARAM_CONTENT_AVAILABLE]).to.equal(mess.contentAvailable);
       expect(body[Constants.PARAM_PAYLOAD_KEY]).to.deep.equal(mess.data);
     });
 
